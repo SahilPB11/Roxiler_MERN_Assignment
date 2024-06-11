@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const TransactionTable = ({ transactions }) => {
-  console.log(transactions);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [filteredTransactions, setFilteredTransactions] =
