@@ -1,12 +1,12 @@
 import express from 'express';
-const {
+import {
     initializeDatabase,
     listTransactions,
     getStatistics,
     getBarChart,
     getPieChart,
     getCombinedData
-} = require('../controllers/transactions');
+} from '../controller/Transaction.js';
 
 const router = express.Router();
 
@@ -17,4 +17,4 @@ router.get('/bar-chart', getBarChart);
 router.get('/pie-chart', getPieChart);
 router.get('/combined-data', getCombinedData);
 
-module.exports = router;
+export default router;
