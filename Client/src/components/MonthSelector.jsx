@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MonthSelector = ({ month, setMonth }) => {
+const MonthSelector = ({ month, year, setMonth, setYear }) => {
     const months = [
         { value: '01', label: 'January' },
         { value: '02', label: 'February' },
@@ -16,18 +16,31 @@ const MonthSelector = ({ month, setMonth }) => {
         { value: '12', label: 'December' },
     ];
 
+    const years = [2021, 2022, 2023]; // Add more years as needed
+
     return (
         <div className="mb-4">
             <label className="block text-gray-700">Select Month</label>
-            <select 
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                value={month}
-                onChange={e => setMonth(e.target.value)}
-            >
-                {months.map(m => (
-                    <option key={m.value} value={m.value}>{m.label}</option>
-                ))}
-            </select>
+            <div className="flex">
+                <select 
+                    className="mr-2 mt-1 block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    value={month}
+                    onChange={e => setMonth(e.target.value)}
+                >
+                    {months.map(m => (
+                        <option key={m.value} value={m.value}>{m.label}</option>
+                    ))}
+                </select>
+                <select 
+                    className="mt-1 block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    value={year}
+                    onChange={e => setYear(e.target.value)}
+                >
+                    {years.map(y => (
+                        <option key={y} value={y}>{y}</option>
+                    ))}
+                </select>
+            </div>
         </div>
     );
 };

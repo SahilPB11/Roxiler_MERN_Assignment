@@ -15,16 +15,14 @@ export const initializeDatabase = async (req, res) => {
 
 export const listTransactions = async (req, res) => {
   try {
-    const { month } = req.query;
-    const year = new Date().getFullYear(); // or another year if needed
+    const { month, year } = req.query;
 
     const startDate = new Date(year, month - 1, 1); // month is 0-indexed
     const endDate = new Date(year, month, 0); // last day of the month
 
     const transactions = await Transaction.find({
-      date: { $gte: startDate, $lte: endDate },
+      dateOfSale: { $gte: startDate, $lte: endDate },
     });
-
     return transactions; // Return the data
   } catch (error) {
     console.error(error);
@@ -34,8 +32,7 @@ export const listTransactions = async (req, res) => {
 
 export const getStatistics = async (req) => {
   try {
-    const { month } = req.query;
-    const year = new Date().getFullYear(); // or another year if needed
+    const { month, year } = req.query;
 
     const startDate = new Date(year, month - 1, 1); // month is 0-indexed
     const endDate = new Date(year, month, 0); // last day of the month
@@ -65,8 +62,7 @@ export const getStatistics = async (req) => {
 
 export const getBarChart = async (req) => {
   try {
-    const { month } = req.query;
-    const year = new Date().getFullYear(); // or another year if needed
+    const { month, year } = req.query;
 
     const startDate = new Date(year, month - 1, 1); // month is 0-indexed
     const endDate = new Date(year, month, 0); // last day of the month
@@ -103,8 +99,7 @@ export const getBarChart = async (req) => {
 
 export const getPieChart = async (req) => {
   try {
-    const { month } = req.query;
-    const year = new Date().getFullYear(); // or another year if needed
+    const { month, year } = req.query;
 
     const startDate = new Date(year, month - 1, 1); // month is 0-indexed
     const endDate = new Date(year, month, 0); // last day of the month
@@ -129,7 +124,7 @@ export const getPieChart = async (req) => {
 
 export const getCombinedData = async (req, res) => {
   try {
-    const { month } = req.query;
+    const { month, year } = req.query;
 
     const [transactions, statistics, barChart, pieChart] = await Promise.all([
       listTransactions(req),
@@ -137,7 +132,6 @@ export const getCombinedData = async (req, res) => {
       getBarChart(req),
       getPieChart(req),
     ]);
-
     res.status(200).json({ transactions, statistics, barChart, pieChart });
   } catch (error) {
     console.error(error);
