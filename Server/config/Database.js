@@ -8,7 +8,7 @@ export const connect_with_database = async () => {
     await mongoose
       .connect(process.env.DATABASE_URL, {
         // Specify the database name
-        dbName: "Roxiler_Assigment",
+        dbName: "Roxiler_Assignment",
       })
       // Log a success message with the host information once connected
       .then((c) => {
